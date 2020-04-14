@@ -32,7 +32,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 end
 ```
 9.  Add controller actions and routes (maybe a `SessionsController`?), as well as any helper methods you want to use (`current_user`, `logged_in?`, etc.) -- these will work the way they have before, except they will always end with a `render json: something_or_another`
-10.  On the JS side, we need only add one thing:  with every AJAX call, we add `credentials: "include"`.  For example:
+10.  We will also want to add a route that simply checks if a user is logged in, and if so, returns whatever info the front end needs for a logged in user.  If not, the response should indicate no one is logged in.  
+11.  On the JS side, this is the 'biggie':  with every AJAX call, we add `credentials: "include"`.  For example:
 ```javascript
 fetch('http://localhost:3000/api/v1/login', {
   credential: "include",
@@ -46,3 +47,6 @@ fetch('http://localhost:3000/api/v1/login', {
   .then(response => response.json())
   .then(processLoginResponse)
 ```
+12.  Our front end should hit the "get current user" route when the app loads, and again with any reload, login, signup, or logout action.  The DOM should update appropriately in each scenario.
+
+Beyond that, we need to make sure to build our login and signup forms with appropriate inputs and more importantly, build our `fetch` requests with the correctly structured body so that that `params` match what we're expecting in our Rails controller.  
