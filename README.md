@@ -12,7 +12,7 @@ This is a repo showing a *very* basic auth setup, but it should look familiar.  
 config.middleware.use ActionDispatch::Cookies
 config.middleware.use ActionDispatch::Session::CookieStore, key: '_cookie_name', expire_after: 14.days, httponly: true
 ```
-7.  Let our `ApplicationController` in on the action:
+7.  Let our `ApplicationController` [in on the action]:
 ```ruby
 class ApplicationController < ActionController::API
   include ActionController::Cookies
@@ -49,4 +49,7 @@ fetch('http://localhost:3000/api/v1/login', {
 ```
 12.  Our front end should hit the "get current user" route when the app loads, and again with any reload, login, signup, or logout action.  The DOM should update appropriately in each scenario.
 
-Beyond that, we need to make sure to build our login and signup forms with appropriate inputs and more importantly, build our `fetch` requests with the correctly structured body so that that `params` match what we're expecting in our Rails controller.  
+Beyond that, we need to make sure to build our login and signup forms with appropriate inputs and more importantly, build our `fetch` requests with the correctly structured body so that that `params` match what we're expecting in our Rails controller.
+
+[API mode]: https://guides.rubyonrails.org/api_app.html
+[in on the action]: https://api.rubyonrails.org/v2.3.8/classes/ActionController/Cookies.html  
