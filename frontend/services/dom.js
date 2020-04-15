@@ -9,6 +9,11 @@ class DOM {
     main.innerHTML = Auth.renderLoginForm
   }
 
+  static loadSignupForm() {
+    const main = document.getElementById("main")
+    main.innerHTML = User.renderSignupForm
+  }
+
   static loadMainContainer() {
     this.resetNav()
     if (Auth.isSignedIn) {
@@ -19,6 +24,7 @@ class DOM {
   }
 
   static loadUserDashboard() {
-    
+    const main = document.getElementById("main")
+    main.innerHTML = `<h4>Logged in.. user dashboard goes here..</h4>`
   }
 }
