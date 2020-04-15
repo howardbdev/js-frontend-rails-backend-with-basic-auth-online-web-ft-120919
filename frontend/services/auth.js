@@ -85,7 +85,7 @@ class Auth {
     if (response.error) {
       alert(response.error)
     } else {
-      this.setCurrentUser(response.current_user)
+      this.setCurrentUser(new User(response.current_user))
       DOM.resetNav()
       DOM.loadMainContainer()
     }
