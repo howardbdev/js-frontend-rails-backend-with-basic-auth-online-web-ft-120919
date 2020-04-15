@@ -58,4 +58,15 @@ class Auth {
       alert("You must provide both email and password")
     }
   }
+
+  static handleSignup() {
+    console.log("signup")
+  }
+  
+  static handleLogout() {
+    this.setCurrentUser({})
+    API.post("/logout")
+      .then(console.log)
+      .finally(() => DOM.loadMainContainer())
+  }
 }
