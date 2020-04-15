@@ -19,12 +19,12 @@ class Api::V1::SessionsController < ApplicationController
     if logged_in?
       render json: {
         current_user: current_user,
-        logged_in: true
+        logged_in: logged_in?
       }
     else
       render json: {
         message: "no one logged in",
-        logged_in: false
+        logged_in: logged_in?
       }
     end
   end
@@ -33,7 +33,7 @@ class Api::V1::SessionsController < ApplicationController
     reset_session
     render json: {
       message: "successful logout",
-      logged_in: false
+      logged_in: logged_in?
     }
   end
 end

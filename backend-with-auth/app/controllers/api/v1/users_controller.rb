@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
       session[:user_id] = @user.id
       render json: {
           current_user: @user,
-          logged_in: true
+          logged_in: logged_in?
         }, status: :created
     else
       render json: error, status: :unprocessable_entity
