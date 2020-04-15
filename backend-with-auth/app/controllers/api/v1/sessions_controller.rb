@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
-  def new
+  def create
     user = User.find_by(email: params[:user][:email])
     if user && user.authenticate(params[:user][:password])
       # success = log in!
