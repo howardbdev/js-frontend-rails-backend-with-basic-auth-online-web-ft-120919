@@ -14,6 +14,7 @@ class Auth {
         if (response.logged_in) {
           this.setCurrentUser(response.current_user)
           DOM.resetNav()
+          DOM.loadMainContainer()
         } else {
           alert(response.message)
         }
@@ -46,27 +47,47 @@ class Auth {
     }
     if (email && password) {
       API.post("/login", userInfo)
-      .then(response => {
-        if (response.error) {
-          alert(response.error)
-        } else {
-          this.setCurrentUser(response.current_user)
-          DOM.resetNav()
-        }
-      })
+      .then(this.handleResponse.bind(this))
+      .catch(alert)
     } else {
       alert("You must provide both email and password")
     }
   }
 
   static handleSignup() {
-    console.log("signup")
+    const email = document.getElementById("signup-form-email-input").value
+    const password = document.getElementById("signup-form-password-input").value
+
+    const userInfo = {
+      user: {
+        email,
+        password,
+      }
+    }
+    if (email && password) {
+      API.post("/users", userInfo)
+      .then(this.handleResponse.bind(this))
+      .catch(alert)
+    } else {
+      alert("You must provide both email and password")
+    }
+
   }
-  
+
   static handleLogout() {
     this.setCurrentUser({})
     API.post("/logout")
       .then(console.log)
       .finally(() => DOM.loadMainContainer())
+  }
+
+  static handleResponse(response){
+    if (response.error) {
+      alert(response.error)
+    } else {
+      this.setCurrentUser(response.current_user)
+      DOM.resetNav()
+      DOM.loadMainContainer()
+    }
   }
 }
