@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", init)
 
 function init() {
-  console.log("hello")
   Auth.getCurrentUser()
   DOM.loadMainContainer()
   attachListeners()
@@ -13,7 +12,6 @@ function attachListeners() {
 }
 
 function handleBodyClick(event) {
-  console.log("hello")
   event.preventDefault()
   switch (event.target.className) {
     case "auth-form":
