@@ -3,14 +3,8 @@ document.addEventListener("DOMContentLoaded", init)
 function init() {
   console.log("hello")
   Auth.getCurrentUser()
-  loadMainContainer()
+  DOM.loadMainContainer()
   attachListeners()
-}
-
-function loadMainContainer() {
-  const main = document.getElementById("main")
-  DOM.resetNav()
-  main.innerHTML = Auth.renderLoginForm
 }
 
 function attachListeners() {
@@ -25,8 +19,11 @@ function handleBodyClick(event) {
     case "auth-form":
       handleAuthFormClick(event)
       break
+    case "nav-link":
+      handleNavLinkClick(event)
+      break
     default:
-      console.log("clicked on", event.target)
+      defaultClick(event)
   }
 }
 
@@ -36,6 +33,24 @@ function handleAuthFormClick(event) {
       Auth.handleLogin()
       break
     default:
-      console.log("clicked on", event.target)
+      defaultClick(event)
   }
 }
+
+function handleNavLinkClick(event) {
+  switch (event.target.id) {
+    case "login-link":
+      DOM.loadLoginForm()
+      break
+    case "signup-link":
+      Auth.handleSignup()
+      break
+    case "logout-link":
+      Auth.handleLogout()
+      break
+    default:
+      defaultClick(event)
+  }
+}
+
+function defaultClick(event) { console.log("clicked on", event.target) }
