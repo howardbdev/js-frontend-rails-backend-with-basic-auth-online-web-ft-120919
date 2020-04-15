@@ -4,7 +4,7 @@ class Navbar {
   }
 
   static get welcomeMessage() {
-    return Auth.isSignedIn && `<span>Welcome ${Auth.currentUser.name}</span`
+    return Auth.isSignedIn && `<span>Welcome ${Auth.currentUser.email}</span`
   }
 
   static get signupLink() {
