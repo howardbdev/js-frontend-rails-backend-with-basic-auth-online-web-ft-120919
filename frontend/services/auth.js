@@ -16,7 +16,7 @@ class Auth {
           DOM.resetNav()
           DOM.loadMainContainer()
         } else {
-          alert(response.message)
+          console.log(response.message)
         }
       })
   }
