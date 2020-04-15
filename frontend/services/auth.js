@@ -20,6 +20,10 @@ class Auth {
       })
   }
 
+  static get isSignedIn() {
+    return !!this.currentUser.email
+  }
+
   static get renderLoginForm() {
     return `
       <form class="auth-form" id="login-form" action="#" method="post">
