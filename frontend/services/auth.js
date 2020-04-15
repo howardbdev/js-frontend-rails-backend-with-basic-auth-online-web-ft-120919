@@ -13,7 +13,7 @@ class Auth {
       .then(response => {
         if (response.logged_in) {
           this.setCurrentUser(response.current_user)
-          Navbar.resetNav()
+          DOM.resetNav()
         } else {
           alert(response.message)
         }
@@ -51,7 +51,7 @@ class Auth {
           alert(response.error)
         } else {
           this.setCurrentUser(response.current_user)
-          Navbar.resetNav()
+          DOM.resetNav()
         }
       })
     } else {

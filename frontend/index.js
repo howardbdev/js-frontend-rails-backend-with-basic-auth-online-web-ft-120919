@@ -9,7 +9,7 @@ function init() {
 
 function loadMainContainer() {
   const main = document.getElementById("main")
-  Navbar.resetNav()
+  DOM.resetNav()
   main.innerHTML = Auth.renderLoginForm
 }
 
