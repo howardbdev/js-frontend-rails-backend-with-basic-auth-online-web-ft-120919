@@ -27,7 +27,6 @@ input {
 }
 
 a:hover {
-  color: tomato;
   text-decoration: none;
   font-weight: bold;
 }
