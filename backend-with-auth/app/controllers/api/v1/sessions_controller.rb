@@ -28,4 +28,12 @@ class Api::V1::SessionsController < ApplicationController
       }
     end
   end
+
+  def destroy
+    reset_session
+    render json: {
+      message: "successful logout",
+      logged_in: false
+    }
+  end
 end
