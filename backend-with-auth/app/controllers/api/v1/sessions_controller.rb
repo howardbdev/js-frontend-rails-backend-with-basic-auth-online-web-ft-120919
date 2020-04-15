@@ -5,7 +5,7 @@ class Api::V1::SessionsController < ApplicationController
       # success = log in!
       session[:user_id] = user.id
       render json: {
-        current_user: user,
+        current_user: current_user.as_json(except: [:password_digest, :created_at, :updated_at]),
         logged_in: true
       }
     else
@@ -18,7 +18,7 @@ class Api::V1::SessionsController < ApplicationController
   def get_current_user
     if logged_in?
       render json: {
-        current_user: current_user,
+        current_user: current_user.as_json(except: [:password_digest, :created_at, :updated_at]),
         logged_in: logged_in?
       }
     else

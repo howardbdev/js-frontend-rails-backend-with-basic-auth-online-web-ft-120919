@@ -20,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       render json: {
-          current_user: @user,
+          current_user: current_user.as_json(except: [:password_digest, :created_at, :updated_at]),
           logged_in: logged_in?
         }, status: :created
     else
