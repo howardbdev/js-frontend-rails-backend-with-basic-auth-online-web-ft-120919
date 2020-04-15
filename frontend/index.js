@@ -32,6 +32,9 @@ function handleAuthFormClick(event) {
     case "login-form-submit":
       Auth.handleLogin()
       break
+    case "signup-form-submit":
+      Auth.handleSignup()
+      break
     default:
       defaultClick(event)
   }
@@ -43,7 +46,7 @@ function handleNavLinkClick(event) {
       DOM.loadLoginForm()
       break
     case "signup-link":
-      Auth.handleSignup()
+      DOM.loadSignupForm()
       break
     case "logout-link":
       Auth.handleLogout()
