@@ -18,9 +18,13 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created
+      session[:user_id] = @user.id
+      render json: {
+          current_user: @user,
+          logged_in: true
+        }, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: error, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +33,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: error, status: :unprocessable_entity
     end
   end
 
@@ -47,5 +51,11 @@ class Api::V1::UsersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def user_params
       params.require(:user).permit(:email, :password)
+    end
+
+    def error
+      {
+        error: @user.errors.full_messages.to_sentence
+      }
     end
 end
