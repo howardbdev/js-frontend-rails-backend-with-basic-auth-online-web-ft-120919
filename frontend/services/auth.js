@@ -38,40 +38,13 @@ class Auth {
   static handleLogin() {
     const email = document.getElementById("login-form-email-input").value
     const password = document.getElementById("login-form-password-input").value
-
-    const userInfo = {
-      user: {
-        email,
-        password,
-      }
-    }
-    if (email && password) {
-      API.post("/login", userInfo)
-      .then(this.handleResponse.bind(this))
-      .catch(alert)
-    } else {
-      alert("You must provide both email and password")
-    }
+    this.loginOrSignup("/login", email, password)
   }
 
   static handleSignup() {
     const email = document.getElementById("signup-form-email-input").value
     const password = document.getElementById("signup-form-password-input").value
-
-    const userInfo = {
-      user: {
-        email,
-        password,
-      }
-    }
-    if (email && password) {
-      API.post("/users", userInfo)
-      .then(this.handleResponse.bind(this))
-      .catch(alert)
-    } else {
-      alert("You must provide both email and password")
-    }
-
+    this.loginOrSignup("/users", email, password)
   }
 
   static handleLogout() {
@@ -79,6 +52,23 @@ class Auth {
     API.post("/logout")
       .then(console.log)
       .finally(() => DOM.loadMainContainer())
+  }
+
+  static loginOrSignup(url, email, password) {
+    const userInfo = {
+      user: {
+        email,
+        password,
+      }
+    }
+
+    if (email && password) {
+      API.post(url, userInfo)
+      .then(this.handleResponse.bind(this))
+      .catch(alert)
+    } else {
+      alert("You must provide both email and password")
+    }
   }
 
   static handleResponse(response){
